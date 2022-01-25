@@ -4,7 +4,7 @@ import {
 	SearchIcon,
 	ShoppingCartIcon,
 } from "@heroicons/react/outline";
-import freeShippingImg from "../assets/images/freeShipping.jpg";
+// import freeShippingImg from "../assets/images/freeShipping.jpg";
 const Header = () => {
 	return (
 		<header>
