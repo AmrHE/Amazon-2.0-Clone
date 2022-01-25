@@ -4,7 +4,7 @@ import {
 	SearchIcon,
 	ShoppingCartIcon,
 } from "@heroicons/react/outline";
-
+import freeShippingImg from "../assets/images/freeShipping.jpg";
 const Header = () => {
 	return (
 		<header>
@@ -55,7 +55,7 @@ const Header = () => {
 			{/* TOP HEADER SECTION ENDS*/}
 
 			{/* BOTTOM HEADER SECTION STARTS */}
-			<div className="flex items-center space-x-3 p-2 pl-6 bg-amazon_blue-light text-white text-sm">
+			<div className="flex items-center space-x-6 xl:space-x-8 p-2 pl-6 bg-amazon_blue-light text-white text-sm">
 				<p className="link flex items-center">
 					<MenuIcon className="h-6 mr-1 flex" />
 					All
@@ -63,12 +63,21 @@ const Header = () => {
 				<p className="link">Prime Video</p>
 				<p className="link">Amazon Business</p>
 				<p className="link">Today's Deals</p>
-				<p className="link hidden lg:inline-flex">Electronics</p>
+				<p className="link hidden lg:inline-flex">Electronics & Computer</p>
 				<p className="link hidden lg:inline-flex">Food & Grocery</p>
 				<p className="link hidden lg:inline-flex">Prime</p>
 				<p className="link hidden lg:inline-flex">Buy Again</p>
 				<p className="link hidden lg:inline-flex">Shopper Toolkit</p>
 				<p className="link hidden lg:inline-flex">Health & Personal Care</p>
+				{/* <div className="hidden lg:hidden md:inline-flex md:px-10 "> //TODO add free shipping on fullfilled by Amazon badge
+					<Image
+						// width={350}
+						// height={100}
+						objectFit="contain"
+						className="p-0 m-0  cursor-pointer lg:h-full"
+						src={freeShippingImg}
+					></Image>
+				</div> */}
 			</div>
 			{/* BOTTOM HEADER SECTION ENDS */}
 		</header>
