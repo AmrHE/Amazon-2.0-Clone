@@ -2,10 +2,32 @@ import { useState } from "react";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/solid";
 import Currency from "react-currency-formatter";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../slices/basketSlice";
 
 const Product = ({ product }) => {
+	const dispatch = useDispatch();
+
 	const { id, title, price, description, category, image, rating } = product;
 	const [isPrime, setIsPrime] = useState(Math.random() < 0.5 ? true : false);
+
+	const handleAddToCart = (e) => {
+		e.preventDefault();
+		const product = {
+			id,
+			title,
+			price,
+			description,
+			category,
+			image,
+			rating,
+			isPrime,
+		};
+
+		//Dispach the addToBasket action
+		//So we can send the product to the basketSlice of the store
+		dispatch(addToBasket(product));
+	};
 
 	return (
 		<div className="relative flex flex-col m-5 bg-white z-30 p-10">
@@ -37,7 +59,9 @@ const Product = ({ product }) => {
 					<p className="text-xs text-gray-500">FREE Next-dat Delivery</p>
 				</div>
 			)}
-			<button className="mt-auto button">Add to Cart</button>
+			<button onClick={handleAddToCart} className="mt-auto button">
+				Add to Cart
+			</button>
 		</div>
 	);
 };
