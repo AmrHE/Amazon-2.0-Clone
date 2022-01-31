@@ -25,7 +25,9 @@ const Checkout = () => {
 					/>
 					<div className="flex flex-col p-5 space-y-10 bg-white">
 						<h1 className="text-3xl border-b pb-4">
-							{items.length === 0 ? "Your Cart is Empty" : "Your Shopping Cart"}
+							{items.length === 0
+								? "Your Cart is Empty..."
+								: "Your Shopping Cart"}
 						</h1>
 						{items.map((item, i) => (
 							<CartItem
