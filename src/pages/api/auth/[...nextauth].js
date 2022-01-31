@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
 	// Configure one or more authentication providers
-	SECRET: process.env.SECRET,
+	secret: process.env.SECRET,
 
 	providers: [
 		GoogleProvider({
