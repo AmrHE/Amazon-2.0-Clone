@@ -18,4 +18,10 @@ export default NextAuth({
 
 		// ...add more providers here
 	],
+
+	theme: {
+		colorScheme: "dark", // "auto" | "dark" | "light"
+		// brandColor: "facc15", // Hex color code
+		logo: "https://links.papareact.com/f90", // Absolute URL to image
+	},
 });
