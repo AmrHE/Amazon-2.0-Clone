@@ -5,11 +5,37 @@ import Header from "../components/Header";
 import { selectItems, SelectTotal } from "../slices/basketSlice";
 import Currency from "react-currency-formatter";
 import { useSession } from "next-auth/react";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 const Checkout = () => {
 	const items = useSelector(selectItems);
 	const total = useSelector(SelectTotal);
 	const { data: session } = useSession();
+
+	// Function that create Stripe checkout session //handleCheckoutClick
+	const createCheckoutSession = async () => {
+		const stripe = await stripePromise;
+
+		// call the backend to create a checkout Session...
+		const checkoutSession = await axios.post("/api/create-checkout-session", {
+			items,
+			email: session.user.email,
+		});
+
+		//Redirect user/customer to checkout
+
+		const result = await stripe.redirectToCheckout({
+			sessionId: checkoutSession.data.id,
+		});
+
+		if (result.error) alert(`${result.error.message}, Please try again later.`);
+	};
+
+	//TODO Implement Items Grouping by Categories in the Cart
+	//TODO Customize the Cart Page Styling and Background
 
 	return (
 		<div className="bg-gray-100">
@@ -56,6 +82,8 @@ const Checkout = () => {
 								</span>
 							</h2>
 							<button
+								role="link"
+								onClick={createCheckoutSession}
 								disabled={!session}
 								className={`button mt-2 ${
 									!session &&
