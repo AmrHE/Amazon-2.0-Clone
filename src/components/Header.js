@@ -11,7 +11,14 @@ import { selectItems } from "../slices/basketSlice";
 
 // import freeShippingImg from "../assets/images/freeShipping.jpg";
 
+//TODO Add THe FreeShipping Badge
+
 // TODO  Add login form and implement it's functionality and restyle the login proviers page & icons
+
+//TODO Implement Humburger Menu
+
+//TODO Implement Bookmarks Functionality
+
 const Header = () => {
 	const { data: session } = useSession();
 	const router = useRouter();
@@ -52,9 +59,11 @@ const Header = () => {
 						<p>{session ? `Hello, ${session.user.name}` : "Hello, Sign In"}</p>
 						<p className="font-extrabold md:text-sm">Account & Lists</p>
 					</div>
-					<div className="cursor-pointer link">
-						<p>Returns</p>
-						<p className="font-extrabold md:text-sm">& Orders</p>
+					<div
+						onClick={() => router.push("/orders")}
+						className="cursor-pointer link"
+					>
+						<p className="font-extrabold md:text-sm">Orders</p>
 					</div>
 					<div
 						onClick={() => router.push("/checkout")}
