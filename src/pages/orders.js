@@ -16,14 +16,14 @@ const Orders = ({ orders }) => {
 					Your Orders
 				</h1>
 				{session ? (
-					<h2>XX Orders</h2>
+					<h2 className="text-xl">{orders.length} Orders</h2>
 				) : (
-					<h2>Please Sign in to see your orders</h2>
+					<h2 className="text-xl">Please Sign in to see your orders</h2>
 				)}
 
 				<div className="mt-5 space-y-4">
 					{orders?.map((order) => (
-						<Order />
+						<Order key={order.id} order={order} />
 					))}
 				</div>
 			</main>
@@ -71,6 +71,7 @@ export async function getServerSideProps(context) {
 	return {
 		props: {
 			orders,
+			session,
 		},
 	};
 }
