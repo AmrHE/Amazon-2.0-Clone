@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useState } from "react";
 import {
 	MenuIcon,
 	SearchIcon,
@@ -8,21 +9,66 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectItems } from "../slices/basketSlice";
+import Link from "next/link";
+import Currency from "react-currency-formatter";
+import { useEffect } from "react";
 
 // import freeShippingImg from "../assets/images/freeShipping.jpg";
 
-//TODO Add THe FreeShipping Badge
-
+// TODO Add THe FreeShipping Badge
 // TODO  Add login form and implement it's functionality and restyle the login proviers page & icons
+// TODO Implement Humburger Menu
+// TODO Implement Bookmarks Functionality
 
-//TODO Implement Humburger Menu
-
-//TODO Implement Bookmarks Functionality
-
-const Header = () => {
+const Header = ({ products }) => {
 	const { data: session } = useSession();
 	const router = useRouter();
 	const items = useSelector(selectItems);
+
+	const [searchTerm, setSearchTerm] = useState("");
+	const [searchResults, setSearchResults] = useState([]);
+	const [showResults, setShowResults] = useState(false);
+
+	// console.log("Procuts: ", products);
+	// console.log("Search Results: ", searchResults);
+
+	const handleSearch = (e) => {
+		let query = e.target.value;
+		query = query.toLowerCase();
+		setSearchTerm(query);
+		setSearchResults(
+			products.filter(
+				(product) =>
+					product.title.toLowerCase().includes(query) ||
+					product.description.toLowerCase().includes(query) ||
+					product.category.toLowerCase().includes(query)
+			)
+		);
+	};
+
+	const handlePressEnter = (e) => {
+		if (e.key === "Enter") {
+			// console.log("Enter presses");
+			let query = e.target.value;
+			query = query.toLowerCase();
+			setSearchTerm(query);
+			setSearchResults(
+				products.filter(
+					(product) =>
+						product.title.toLowerCase().includes(query) ||
+						product.description.toLowerCase().includes(query) ||
+						product.category.toLowerCase().includes(query)
+				)
+			);
+			router.push({
+				pathname: "/search",
+				query: {
+					results: JSON.stringify(searchResults),
+					searchTerm: searchTerm,
+				},
+			});
+		}
+	};
 
 	return (
 		<header>
@@ -42,12 +88,74 @@ const Header = () => {
 				</div>
 
 				{/* SEARCH BAR */}
-				<div className="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500">
+				<div className="hidden relative sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500">
 					<input
+						onMouseOver={() => setShowResults(true)}
+						onBlur={() => setShowResults(false)}
+						onFocus={() => setShowResults(true)}
+						onKeyPress={handlePressEnter}
+						value={searchTerm}
+						onChange={handleSearch}
+						placeholder="Search anything you need... (Live Search)"
 						className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
 						type="text"
 					/>
-					<SearchIcon className="h-12 p-4" />
+					<SearchIcon
+						className="h-12 p-4"
+						onClick={() =>
+							router.push({
+								pathname: "/search",
+								query: {
+									results: JSON.stringify(searchResults),
+									searchTerm: searchTerm,
+								},
+							})
+						}
+					/>
+
+					{showResults && (
+						<div
+							onClick={() => setShowResults(true)}
+							onMouseOver={() => setShowResults(true)}
+							onMouseLeave={() => setShowResults(false)}
+							className="absolute w-full bg-white bottom-0 z-50 rounded-md"
+							style={{
+								transform: "translateY(100%)",
+								height: "auto",
+								maxHeight: "400px",
+								overflowY: "auto",
+							}}
+						>
+							{searchResults?.length ? (
+								searchResults.map(({ id, title, price, category }) => (
+									<div
+										key={id}
+										className="p-2 mt-2 border-b-2 rounded-md border-gray-100 bg-gray-50"
+									>
+										<Link href={`/products/${id}`}>
+											<h5 className="font-medium text-sm text-gray-600">
+												{title}
+											</h5>
+										</Link>
+										<Link href={`/products/${id}`}>
+											<p className="text-xs text-gray-400">
+												{category}
+												<Currency quantity={price} />
+											</p>
+										</Link>
+									</div>
+								))
+							) : (
+								<>
+									{searchTerm && (
+										<p className="text-xs text-gray-400 text-center py-2">
+											No product found
+										</p>
+									)}
+								</>
+							)}
+						</div>
+					)}
 				</div>
 
 				{/*RIGHT PART*/}
@@ -82,8 +190,14 @@ const Header = () => {
 			{/* TOP HEADER SECTION ENDS*/}
 
 			{/* BOTTOM HEADER SECTION STARTS */}
-			<div className="flex items-center space-x-6 xl:space-x-8 p-2 pl-6 bg-amazon_blue-light text-white text-sm">
-				<p className="link flex items-center">
+			<div
+				onClick={() => router.push("/products")}
+				className="flex items-center space-x-6 xl:space-x-8 p-2 pl-6 bg-amazon_blue-light text-white text-sm"
+			>
+				<p
+					// TODO ADD THE PRODUCT LINK HERE AND UPDATE EACH CATEGORY WITH ITS CATEGORY FILTER
+					className="link flex items-center"
+				>
 					<MenuIcon className="h-6 mr-1 flex" />
 					All
 				</p>
