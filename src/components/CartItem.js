@@ -3,6 +3,7 @@ import { StarIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { addToBasket, removeFromBasket } from "../slices/basketSlice";
 import QuantityCount from "./QuantityCount/QuantityCount";
 
@@ -18,6 +19,8 @@ const CartItem = ({
 	quantity,
 }) => {
 	const dispatch = useDispatch();
+	const router = useRouter();
+
 	const [quantityUp, setQuantityUp] = useState(quantity);
 
 	// const handleAddToCart = (e) => {
@@ -49,7 +52,12 @@ const CartItem = ({
 
 			{/* MIDDLE COLUMN (DETAILS) */}
 			<div className="col-span-3 mx-5">
-				<p className="font-bold">{title}</p>
+				<p
+					className="link font-bold"
+					onClick={() => router.push(`/products/${id}`)}
+				>
+					{title}
+				</p>
 				<div className="flex items-center">
 					{Array(Math.round(rating.rate))
 						.fill()

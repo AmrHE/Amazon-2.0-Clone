@@ -6,6 +6,8 @@ import { StarIcon } from "@heroicons/react/solid";
 import { addToBasket } from "../slices/basketSlice";
 import QuantityCount from "./QuantityCount/QuantityCount";
 import styles from "../styles/Product.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const QuickView = ({ setShowQuick, id, products }) => {
 	const [product, setProduct] = useState({});
@@ -13,11 +15,23 @@ const QuickView = ({ setShowQuick, id, products }) => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 
+	const notify = () =>
+		toast("Item added to your cart successfully", {
+			position: "top-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+
 	const handleAddToCart = (e) => {
 		e.preventDefault();
 		//Dispach the addToBasket action
 		//So we can send the product to the basketSlice of the store
 		dispatch(addToBasket({ ...product, title: product.title, quantity }));
+		notify();
 	};
 
 	useEffect(() => {
@@ -101,6 +115,7 @@ const QuickView = ({ setShowQuick, id, products }) => {
 							>
 								View details
 							</button>
+							<ToastContainer />
 						</div>
 					</div>
 				</div>

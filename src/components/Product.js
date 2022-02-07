@@ -9,6 +9,8 @@ import { EyeIcon } from "@heroicons/react/outline";
 import QuickView from "./QuickView";
 import styles from "../styles/Product.module.css";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({
 	// product,
@@ -28,6 +30,17 @@ const Product = ({
 
 	const [showQuick, setShowQuick] = useState(false);
 
+	const notify = () =>
+		toast("Item added to your cart successfully", {
+			position: "top-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+
 	const handleAddToCart = (e) => {
 		e.preventDefault();
 		const product = {
@@ -46,7 +59,7 @@ const Product = ({
 		//So we can send the product to the basketSlice of the store
 		dispatch(addToBasket(product));
 
-		// TODO add React Toast Functionality When adding to the cart
+		notify();
 	};
 
 	return (
@@ -57,7 +70,6 @@ const Product = ({
 						"relative flex flex-col m-5 z-40 bg-white p-8 rounded-xl " +
 						styles.loop_product
 					}
-					onClick={() => router.push(`/products/${id}`)}
 				>
 					<p className="absolute top-2 right-2	text-xs italic text-gray-400">
 						{category.charAt(0).toUpperCase() + category.slice(1)}
@@ -126,6 +138,7 @@ const Product = ({
 					<button onClick={handleAddToCart} className="mt-auto button">
 						Add to Cart
 					</button>
+					<ToastContainer />
 				</div>
 			</Fade>
 			{showQuick && (

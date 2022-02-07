@@ -13,6 +13,9 @@ import QuantityCount from "../../components/QuantityCount/QuantityCount";
 import Product from "../../components/Product";
 import Footer from "../../components/Footer";
 import BackToTop from "../../components/BackToTop";
+import { addToBasket } from "../../slices/basketSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetails = ({ product, products }) => {
 	const dispatch = useDispatch();
@@ -23,11 +26,23 @@ const ProductDetails = ({ product, products }) => {
 
 	const [quantity, setQuantity] = useState(1);
 
+	const notify = () =>
+		toast("Item added to your cart successfully", {
+			position: "top-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+
 	const handleAddToCart = (e) => {
 		e.preventDefault();
 		//Dispach the addToBasket action
 		//So we can send the product to the basketSlice of the store
 		dispatch(addToBasket({ ...product, title: product.title, quantity }));
+		notify();
 	};
 
 	return (
@@ -89,6 +104,7 @@ const ProductDetails = ({ product, products }) => {
 						<button className="button w-full mt-4" onClick={handleAddToCart}>
 							Add To Cart
 						</button>
+						<ToastContainer />
 					</div>
 				</div>
 			</main>
