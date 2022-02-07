@@ -21,6 +21,42 @@ const Banner = () => {
 				<div>
 					<img loading="lazy" src="https://links.papareact.com/7ma" alt="" />
 				</div>
+
+				<div>
+					<img
+						loading="lazy"
+						src="https://m.media-amazon.com/images/I/71mlBaiHLwL._SX3000_.jpg"
+						alt=""
+					/>
+				</div>
+				<div>
+					<img
+						loading="lazy"
+						src="https://m.media-amazon.com/images/I/61Bu4h-VnJL._SX3000_.jpg"
+						alt=""
+					/>
+				</div>
+				<div>
+					<img
+						loading="lazy"
+						src="https://m.media-amazon.com/images/I/61FYIg8gEPL._SX3000_.jpg"
+						alt=""
+					/>
+				</div>
+				<div>
+					<img
+						loading="lazy"
+						src="https://m.media-amazon.com/images/I/61-cvMMRxzL._SX3000_.jpg"
+						alt=""
+					/>
+				</div>
+				<div>
+					<img
+						loading="lazy"
+						src="https://m.media-amazon.com/images/I/61w4H948WuL._SX3000_.jpg"
+						alt=""
+					/>
+				</div>
 			</Carousel>
 		</div>
 	);
