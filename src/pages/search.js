@@ -5,8 +5,8 @@ import Header from "../components/Header";
 import { withRouter } from "next/router";
 import Product from "../components/Product";
 import Link from "next/link";
-import Footer from "../../components/Footer";
-import BackToTop from "../../components/BackToTop";
+import Footer from "../components/Footer";
+import BackToTop from "../components/BackToTop";
 
 const Search = (props) => {
 	// console.log(props);
