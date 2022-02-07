@@ -1,8 +1,10 @@
 import Product from "./Product";
 
 const ProductFeed = ({ products }) => {
+	//TODO Implement a Currency Selector in the Footer/Header
+
 	return (
-		<div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-48 mx-auto">
+		<div className="z-30 relative max-w-screen-2xl grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-48 mx-auto">
 			{/* {products.map(
 				({ id, title, price, description, category, image, rating }) => (
 					<Product
@@ -18,7 +20,13 @@ const ProductFeed = ({ products }) => {
 			)} */}
 
 			{products.slice(0, 4).map((product) => (
-				<Product key={product.id} product={product} />
+				<Product
+					key={product.id}
+					// product={product}
+					// title={product.name}
+					products={products}
+					{...product}
+				/>
 			))}
 			<img
 				className="md:col-span-full"
@@ -28,11 +36,21 @@ const ProductFeed = ({ products }) => {
 			{/* <div className="md:col-span-2"> */}
 			<div className="md:col-span-2">
 				{products.slice(4, 5).map((product) => (
-					<Product key={product.id} product={product} />
+					<Product
+						key={product.id}
+						// product={product}
+						products={products}
+						{...product}
+					/>
 				))}
 			</div>
 			{products.slice(5, products.length).map((product) => (
-				<Product key={product.id} product={product} />
+				<Product
+					key={product.id}
+					// product={product}
+					products={products}
+					{...product}
+				/>
 			))}
 		</div>
 	);
