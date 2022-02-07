@@ -23,8 +23,8 @@ const QuickView = ({ setShowQuick, id, products }) => {
 	useEffect(() => {
 		const item = products.filter((product) => product.id == id)[0];
 		setProduct(item);
-		console.log(item);
-		console.log(products);
+		// console.log(item);
+		// console.log(products);
 	}, [id]);
 	return (
 		<>

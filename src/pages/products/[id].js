@@ -18,8 +18,8 @@ const ProductDetails = ({ product, products }) => {
 	const dispatch = useDispatch();
 	const { id, title, price, image, description, rating, category } = product;
 
-	console.log(product);
-	console.log(products);
+	// console.log(product);
+	// console.log(products);
 
 	const [quantity, setQuantity] = useState(1);
 

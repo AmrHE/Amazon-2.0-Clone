@@ -8,7 +8,7 @@ import BackToTop from "../components/BackToTop";
 
 const Orders = ({ orders, products }) => {
 	const { data: session } = useSession();
-	console.log(orders);
+	// console.log(orders);
 
 	return (
 		<div>

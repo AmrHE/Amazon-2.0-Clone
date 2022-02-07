@@ -18,7 +18,7 @@ const Filter = () => {
 	const [price, setPrice] = useState(0);
 	const [priceMax, setPriceMax] = useState(1);
 
-	console.log(allProducts);
+	// console.log(allProducts);
 
 	//ADD COMMENT HERE
 	const getUniqueValues = (data, type) => {
