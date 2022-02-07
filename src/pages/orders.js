@@ -3,14 +3,16 @@ import Header from "../components/Header";
 import db from "../../firebase";
 import moment from "moment";
 import Order from "../components/Order";
+import Footer from "../components/Footer";
+import BackToTop from "../components/BackToTop";
 
-const Orders = ({ orders }) => {
+const Orders = ({ orders, products }) => {
 	const { data: session } = useSession();
 	console.log(orders);
 
 	return (
 		<div>
-			<Header />
+			<Header products={products} />
 			<main className="max-w-screen-lg mx-auto p-10">
 				<h1 className="text-3xl border-b mb-2 pb-1 border-yellow-400">
 					Your Orders
@@ -27,6 +29,9 @@ const Orders = ({ orders }) => {
 					))}
 				</div>
 			</main>
+
+			<BackToTop />
+			<Footer />
 		</div>
 	);
 };
@@ -68,10 +73,15 @@ export async function getServerSideProps(context) {
 		}))
 	);
 
+	const products = await fetch("https://fakestoreapi.com/products").then(
+		(res) => res.json()
+	);
+
 	return {
 		props: {
 			orders,
 			session,
+			products,
 		},
 	};
 }
