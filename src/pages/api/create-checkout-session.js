@@ -9,8 +9,7 @@ export default async (req, res) => {
 	//Convert the Items Array to the format that Stripe expects from us
 	const transformedItems = items.map((item) => ({
 		description: item.description,
-		//TODO Update The quantity variable  down below if the quantity logic ((+,-) icons) is impmeneted
-		quantity: 1,
+		quantity: item.quantity,
 		price_data: {
 			currency: "usd",
 			unit_amount: item.price * 100,
