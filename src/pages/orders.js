@@ -18,7 +18,7 @@ const Orders = ({ orders, products }) => {
 					Your Orders
 				</h1>
 				{session ? (
-					<h2 className="text-xl">{orders.length} Orders</h2>
+					<h2 className="text-xl">{orders?.length} Orders</h2>
 				) : (
 					<h2 className="text-xl">Please Sign in to see your orders</h2>
 				)}

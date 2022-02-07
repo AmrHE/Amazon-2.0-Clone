@@ -9,7 +9,7 @@ import { EyeIcon } from "@heroicons/react/outline";
 import QuickView from "./QuickView";
 import styles from "../styles/Product.module.css";
 import { useRouter } from "next/router";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({
@@ -30,16 +30,16 @@ const Product = ({
 
 	const [showQuick, setShowQuick] = useState(false);
 
-	const notify = () =>
-		toast("Item added to your cart successfully", {
-			position: "top-right",
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		});
+	// const notify = () =>
+	// 	toast("Item added to your cart successfully", {
+	// 		position: "top-right",
+	// 		autoClose: 5000,
+	// 		hideProgressBar: false,
+	// 		closeOnClick: true,
+	// 		pauseOnHover: true,
+	// 		draggable: true,
+	// 		progress: undefined,
+	// 	});
 
 	const handleAddToCart = (e) => {
 		e.preventDefault();
@@ -59,7 +59,7 @@ const Product = ({
 		//So we can send the product to the basketSlice of the store
 		dispatch(addToBasket(product));
 
-		notify();
+		// notify();
 	};
 
 	return (
@@ -138,7 +138,7 @@ const Product = ({
 					<button onClick={handleAddToCart} className="mt-auto button">
 						Add to Cart
 					</button>
-					<ToastContainer />
+					{/* <ToastContainer /> */}
 				</div>
 			</Fade>
 			{showQuick && (

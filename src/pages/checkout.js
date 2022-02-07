@@ -78,7 +78,7 @@ const Checkout = ({ products }) => {
 							<div className="mb-5">
 								{categories.length &&
 									categories.map((category) => (
-										<>
+										<div key={category}>
 											<h1 className="text-xl pb-4 font-medium">
 												{category.charAt(0).toUpperCase() + category.slice(1)}
 											</h1>
@@ -90,7 +90,7 @@ const Checkout = ({ products }) => {
 															<CartItem key={item.id} {...item} />
 														))}
 											</div>
-										</>
+										</div>
 									))}
 							</div>
 							{/* {items.map((item, i) => (
